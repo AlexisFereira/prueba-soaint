@@ -11,14 +11,16 @@ function FetchGithub() {
   let handler = x=> Setstate({...state,...x});
 
   let Request = () =>{
-    fetch('http://api.github.com/users/workshopsjsmvd')
-        .then(res => {
+    fetch('https://api.github.com/users/workshopsjsmvd')
+        .then( async res => {
+            let result  = await  res.json();
+          console.log(result,"::::")
 
           if(res.status === 200){
             handler({
               loading:false,
-              name: res.name,
-              location: res.location
+              name: result.name,
+              location: result.location
             })
           }else{
             handler({
